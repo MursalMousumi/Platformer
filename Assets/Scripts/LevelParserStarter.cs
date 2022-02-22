@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelParserStarter : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class LevelParserStarter : MonoBehaviour
 
     public GameObject QuestionBox;
 
-    public GameObject Stone;
+    [FormerlySerializedAs("Stone")] 
+    public GameObject StonePrefab;
 
     public Transform parentTransform;
     // Start is called before the first frame update

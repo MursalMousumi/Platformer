@@ -1,14 +1,24 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelParser : MonoBehaviour
 {
     public string filename;
-    public GameObject Rock;
-    public GameObject Brick;
-    public GameObject QuestionBox;
-    public GameObject Stone;
+    
+    [FormerlySerializedAs("Rock")] 
+    public GameObject RockPrefab;
+    
+    [FormerlySerializedAs("Brick")] 
+    public GameObject BrickPrefab;
+    
+    [FormerlySerializedAs("QuestionBox")] 
+    public GameObject QuestionBoxPrefab;
+    
+    [FormerlySerializedAs("Stone")] 
+    public GameObject StonePrefab;
+    
     public Transform levelRoot;
 
     // --------------------------------------------------------------------------
@@ -56,6 +66,31 @@ public class LevelParser : MonoBehaviour
             foreach (var letter in letters)
             {
                 // Instantiate a new GameObject that matches the type specified by letter
+                var rockObject = Instantiate(RockPrefab);
+                var brickObject = Instantiate(BrickPrefab);
+                var testObject = Instantiate(StonePrefab);
+                var questionObject = Instantiate(QuestionBoxPrefab);
+                
+                if (letter == 'x')
+                {
+                    rockObject.transform.position = new Vector3(column, row, 0f);
+                }
+                
+                if (letter == 'b')
+                {
+                    brickObject.transform.position = new Vector3(column, row, 0f);
+                }
+                
+                if (letter == '?')
+                {
+                    questionObject.transform.position = new Vector3(column, row, 0f);
+                }
+
+                if (letter == 's')
+                {
+                    testObject.transform.position = new Vector3(column, row, 0f);
+                }
+                
                 // Position the new GameObject at the appropriate location by using row and column
                 // Parent the new GameObject under levelRoot
                 column++;
