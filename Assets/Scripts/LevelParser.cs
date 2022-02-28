@@ -18,6 +18,12 @@ public class LevelParser : MonoBehaviour
     
     [FormerlySerializedAs("Stone")] 
     public GameObject StonePrefab;
+
+    [FormerlySerializedAs("Water")] 
+    public GameObject WaterPrefab;
+    
+    [FormerlySerializedAs("Goal")] 
+    public GameObject GoalPrefab;
     
     public Transform levelRoot;
 
@@ -70,6 +76,8 @@ public class LevelParser : MonoBehaviour
                 var brickObject = Instantiate(BrickPrefab);
                 var testObject = Instantiate(StonePrefab);
                 var questionObject = Instantiate(QuestionBoxPrefab);
+                var waterObject = Instantiate(WaterPrefab);
+                var goalObject = Instantiate(GoalPrefab);
                 
                 if (letter == 'x')
                 {
@@ -89,6 +97,16 @@ public class LevelParser : MonoBehaviour
                 if (letter == 's')
                 {
                     testObject.transform.position = new Vector3(column, row, 0f);
+                }
+
+                if (letter == 'w')
+                {
+                    waterObject.transform.position = new Vector3(column, row, 0f);
+                }
+
+                if (letter == 'g')
+                {
+                    goalObject.transform.position = new Vector3(column, row, 0f);
                 }
                 
                 // Position the new GameObject at the appropriate location by using row and column

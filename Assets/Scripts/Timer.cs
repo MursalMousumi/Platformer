@@ -1,30 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private float accumulatedTime = 0f;
+    public int startTime = 400;
+    public float timeScale = 2f;
+    public TextMeshProUGUI displayText;
 
-    private float totalTime = 0f;
-    // Start is called before the first frame update
+    private float currentTime;
+
+    //-----------------------------------------------------------------------------
     void Start()
     {
-        
+        currentTime = startTime;
     }
 
-    // Update is called once per frame
+    //-----------------------------------------------------------------------------
     void Update()
     {
-        accumulatedTime += Time.deltaTime;
-        
-        if (accumulatedTime > 1f)
-        {
-            totalTime += 1f;
-            accumulatedTime = 0f;
+        currentTime -= Time.deltaTime * timeScale;
+        int integerTime = (int)currentTime;
+        displayText.text = $"{integerTime:D3}";
 
-            Debug.Log($"time is {totalTime}");
+        if (integerTime == 0)
+        {
+            Debug.Log("You failed to complete the level in time");
         }
     }
 }
